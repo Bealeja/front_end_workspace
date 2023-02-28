@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Community Portal Data</title>
+    <script language="JavaScript" type="text/JavaScript">
+      // hint: the array below has been created for you to use for the loop
+      let tempType = ['temp_max','temp_min'];
+
+      // The data has been provided below
+      let json='{"coord":{"lon":-0.1257,"lat":51.5085},"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04n"}],"base":"stations","main":{"temp":285.5,"feels_like":285.27,"temp_min":284.01,"temp_max":286.56,"pressure":1014,"humidity":95},"visibility":10000,"wind":{"speed":3.6,"deg":230},"clouds":{"all":75},"dt":1654478826,"sys":{"type":2,"id":2019646,"country":"GB","sunrise":1654487151,"sunset":1654546365},"timezone":3600,"id":2643743,"name":"London","cod":200}';
+      // Add your code below
+
+      // Convert the JSON data to lower case
+      json = json.toLowerCase();
+
+      // Create a for...in loop to loop through the tempType list
+      for (let temp in tempType) {
+        // Perform a split on the data
+        let jsonEditOne = json.split(`${tempType[temp]}":`);
+
+        // Perform a second split on the data
+        let jsonEditTwo = jsonEditOne[1].split(',');
+
+        // Convert to float and two decimal places
+        kelvin = parseFloat(jsonEditTwo[0]).toFixed(2);
+
+        // Convert Kelvin to Celcius
+        celcius = (kelvin - 273.15).toFixed(2);
+
+        // Use an if statement with two conditions and a default
+        if (celcius < 10) {
+          description = "Cold";
+        } else if (celcius > 30) {
+          description = "Hot";
+        } else {
+          description = "Mild";
+        }
+
+        // write the result using back-ticks
+
+        // Display Description and Temp in Celcius with the C unit
+        // Example: temp_min: Cold 4.23C
+        document.write(`${tempType[temp]}: ${description} ${celcius}C<br>`);
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
